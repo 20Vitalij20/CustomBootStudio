@@ -1,0 +1,77 @@
+﻿timeout 30
+gfxmenu /boot/Skins
+default 0
+
+title Загрузка с жёсткого диска
+find --set-root --ignore-floppies --ignore-cd /bootmgr || find --set-root --ignore-floppies --ignore-cd /ntldr
+map (hd0) (hd1)
+map (hd1) (hd0)
+map --hook
+rootnoverify (hd0)
+chainloader (hd0)+1
+
+title Загрузка Acronis Disk Director - Работа с разделами жёстких дисков
+find --set-root /boot/Acronis.ISO
+map --mem /boot/Acronis.ISO (hd32)
+map --hook
+chainloader (hd32) 
+
+title Загрузка Acronis True Image X 64 - Резервное копирование и востановление жёстких дисков
+find --set-root /boot/Acronis_True_Image+Acronis_Disk_Direct_X_64.ISO
+map --mem /boot/Acronis_True_Image+Acronis_Disk_Direct_X_64.ISO (hd32)
+map --hook
+chainloader (hd32)
+
+title Установка Windows 10 / 11 X 64  8 in 1 Compact & Full by Flibustier - Русская версия
+map --unmap=0:0xff
+map --unhook
+root (hd0,0)
+chainloader /bootmgr
+
+title Загрузка Windows 10PE - Мини версия
+find --set-root /boot/Win10PE.ISO
+map --mem /boot/Win10PE.ISO (hd32)
+map --hook
+chainloader (hd32)
+
+title Загрузка Windows 8PE - Мини версия
+find --set-root /boot/Win8PE.ISO
+map --mem /boot/Win8PE.ISO (hd32)
+map --hook
+chainloader (hd32)  
+
+title Загрузка Windows 7PE - Мини версия
+find --set-root /boot/Win7PE.ISO
+map --mem /boot/Win7PE.ISO (hd32)
+map --hook
+chainloader (hd32)
+
+title Загрузка Windows WinXPE - Мини версия
+find --set-root /boot/WinXPE.ISO
+map --mem /boot/WinXPE.ISO (hd32)
+map --hook
+chainloader (hd32)
+
+title Загрузка Plop Boot Manager
+ls /usbdrive.tag || find --set-root --ignore-cd /usbdrive.tag
+kernel /plpbt.bin
+
+title Командная строка
+commandline
+
+title Дополнительные утилиты >>>
+configfile /boot/menu_u.lst
+
+title
+root
+
+title Загрузка c CD/DVD-ROM
+cdrom --init
+map --hook
+chainloader (cd0)
+
+title Перезагрузка компьютера
+reboot
+
+title Выключение компьютера
+halt
