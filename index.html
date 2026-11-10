@@ -1,662 +1,629 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Custom Boot Studio — Мультизагрузочные решения и кастомизация</title>
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
- <style>
- :root {
- --bg-base: #07090e;
- --bg-card: rgba(13, 17, 27, 0.75);
- --bg-card-border: rgba(0, 240, 255, 0.2);
- --accent-cyan: #00f0ff;
- --accent-magenta: #ff007b;
- --accent-purple: #7928ca;
- --text-main: #e2e8f0;
- --text-muted: #94a3b8;
- --glow-cyan: 0 0 20px rgba(0, 240, 255, 0.35);
- --glow-magenta: 0 0 20px rgba(255, 0, 123, 0.35);
- --font-display: 'Orbitron', monospace, sans-serif;
- --font-sub: 'Rajdhani', sans-serif;
- --font-mono: 'JetBrains Mono', monospace;
- }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Boot Studio — Мультизагрузочные решения и кастомизация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #07090e;
+            --bg-card: rgba(13, 17, 27, 0.75);
+            --bg-card-border: rgba(0, 240, 255, 0.2);
+            --accent-cyan: #00f0ff;
+            --accent-magenta: #ff007b;
+            --accent-purple: #7928ca;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --glow-cyan: 0 0 20px rgba(0, 240, 255, 0.35);
+            --glow-magenta: 0 0 20px rgba(255, 0, 123, 0.35);
+            --font-display: 'Orbitron', monospace, sans-serif;
+            --font-sub: 'Rajdhani', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
 
- * {
- box-sizing: border-box;
- margin: 0;
- padding: 0;
- }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
- body {
- background-color: var(--bg-base);
- background-image: 
-radial-gradient(circle at 15% 20%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
- radial-gradient(circle at 85% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 45%),
- linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
- linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
- background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
- color: var(--text-main);
- font-family: var(--font-sub);
- font-size: 18px;
- line-height: 1.6;
- overflow-x: hidden;
- }
+        body {
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 45%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            color: var(--text-main);
+            font-family: var(--font-sub);
+            font-size: 18px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
- .container {
- max-width: 1200px;
- margin: 0 auto;
- padding: 0 24px;
- }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
- /* HEADER */
- header {
- position: sticky;
- top: 0;
- z-index: 100;
- backdrop-filter: blur(12px);
- background: rgba(7, 9, 14, 0.85);
- border-bottom: 1px solid rgba(0, 240, 255, 0.15);
- }
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(7, 9, 14, 0.85);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+        }
 
- .nav-content {
- display: flex;
- align-items: center;
- justify-content: space-between;
- height: 74px;
- }
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 74px;
+        }
 
- .logo {
- font-family: var(--font-display);
- font-size: 1.25rem;
- font-weight: 800;
- letter-spacing: 2px;
- color: #fff;
- text-transform: uppercase;
- text-decoration: none;
- display: flex;
- align-items: center;
- gap: 10px;
- }
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
- .logo span {
- color: var(--accent-cyan);
- text-shadow: var(--glow-cyan);
- }
+        .logo span {
+            color: var(--accent-cyan);
+            text-shadow: var(--glow-cyan);
+        }
 
- .nav-links {
- display: flex;
- gap: 28px;
- list-style: none;
- }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
 
- .nav-links a {
- color: var(--text-muted);
- text-decoration: none;
- font-family: var(--font-mono);
- font-size: 0.9rem;
- text-transform: uppercase;
- letter-spacing: 1px;
- transition: color 0.3s, text-shadow 0.3s;
- }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
 
- .nav-links a:hover {
- color: var(--accent-cyan);
- text-shadow: var(--glow-cyan);
- }
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+            text-shadow: var(--glow-cyan);
+        }
 
- /* HERO SECTION */
- .hero {
- padding: 120px 0 90px;
- text-align: center;
- position: relative;
- }
+        /* HERO SECTION */
+        .hero {
+            padding: 120px 0 90px;
+            text-align: center;
+            position: relative;
+        }
 
- .hero::before {
- content: '';
- position: absolute;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
- width: 320px;
- height: 320px;
- background: var(--accent-cyan);
- filter: blur(160px);
- opacity: 0.15;
- z-index: -1;
- }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            background: var(--accent-cyan);
+            filter: blur(160px);
+            opacity: 0.15;
+            z-index: -1;
+        }
 
- .hero-badge {
- display: inline-block;
- font-family: var(--font-mono);
- font-size: 0.8rem;
- color: var(--accent-cyan);
- border: 1px solid var(--accent-cyan);
- padding: 4px 14px;
- text-transform: uppercase;
- letter-spacing: 2px;
- margin-bottom: 24px;
- box-shadow: var(--glow-cyan);
- background: rgba(0, 240, 255, 0.05);
- border-radius: 2px;
- }
+        .hero-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            padding: 4px 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            box-shadow: var(--glow-cyan);
+            background: rgba(0, 240, 255, 0.05);
+            border-radius: 2px;
+        }
 
- .hero-title {
- font-family: var(--font-display);
- font-size: clamp(2.2rem, 5vw, 3.8rem);
- font-weight: 900;
- line-height: 1.1;
- margin-bottom: 20px;
- text-transform: uppercase;
- letter-spacing: 2px;
- }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
- .hero-title .gradient-text {
- background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 50%, var(--accent-magenta) 100%);
- -webkit-background-clip: text;
- -webkit-text-fill-color: transparent;
- }
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 50%, var(--accent-magenta) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
- .hero-desc {
- max-width: 720px;
- margin: 0 auto;
- color: var(--text-muted);
- font-size: 1.15rem;
- }
+        .hero-desc {
+            max-width: 720px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 1.15rem;
+        }
 
- /* SECTION STYLING */
- section {
- padding: 80px 0;
- }
+        /* SECTION STYLING */
+        section {
+            padding: 80px 0;
+        }
 
- .section-header {
- margin-bottom: 48px;
- position: relative;
- }
+        .section-header {
+            margin-bottom: 48px;
+            position: relative;
+        }
 
- .section-tag {
- font-family: var(--font-mono);
- color: var(--accent-magenta);
- font-size: 0.85rem;
- text-transform: uppercase;
- letter-spacing: 2px;
- display: block;
- margin-bottom: 6px;
- }
+        .section-tag {
+            font-family: var(--font-mono);
+            color: var(--accent-magenta);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 6px;
+        }
 
- .section-title {
- font-family: var(--font-display);
- font-size: 2rem;
- letter-spacing: 1.5px;
- text-transform: uppercase;
- color: #fff;
- }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #fff;
+        }
 
- /* ABOUT / FEATURES */
- .features-grid {
- display: grid;
- grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
- gap: 24px;
- }
+        /* ABOUT / FEATURES */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
 
- .feature-card {
- background: var(--bg-card);
- border: 1px solid rgba(255, 255, 255, 0.06);
- padding: 32px 24px;
- position: relative;
- backdrop-filter: blur(8px);
- transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
- }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 32px 24px;
+            position: relative;
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
 
- .feature-card::before {
- content: '';
- position: absolute;
- top: 0;
- left: 0;
- width: 4px;
- height: 100%;
- background: var(--accent-cyan);
- opacity: 0;
- transition: opacity 0.3s;
- }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--bg-card-border);
+            box-shadow: var(--glow-cyan);
+        }
 
- .feature-card:hover {
- transform: translateY(-4px);
- border-color: var(--bg-card-border);
- box-shadow: var(--glow-cyan);
- }
+        .feature-icon {
+            font-family: var(--font-mono);
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+        }
 
- .feature-card:hover::before {
- opacity: 1;
- }
+        .feature-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
 
- .feature-icon {
- font-family: var(--font-mono);
- font-size: 1.8rem;
- color: var(--accent-cyan);
- margin-bottom: 16px;
- }
+        .feature-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
 
- .feature-title {
- font-family: var(--font-display);
- font-size: 1.15rem;
- margin-bottom: 12px;
- color: #fff;
- letter-spacing: 1px;
- }
+        /* BUILDS / PACKS */
+        .builds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 32px;
+        }
 
- .feature-text {
- color: var(--text-muted);
- font-size: 0.95rem;
- line-height: 1.5;
- }
+        .build-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
 
- /* BUILDS / PACKS */
- .builds-grid {
- display: grid;
- grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
- gap: 32px;
- }
+        .build-card.cyan-theme:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+        }
 
- .build-card {
- background: var(--bg-card);
- border: 1px solid rgba(255, 255, 255, 0.08);
- position: relative;
- backdrop-filter: blur(10px);
- overflow: hidden;
- display: flex;
- flex-direction: column;
- transition: border-color 0.3s, box-shadow 0.3s;
- }
+        .build-card.magenta-theme:hover {
+            border-color: var(--accent-magenta);
+            box-shadow: var(--glow-magenta);
+        }
 
- .build-card.cyan-theme:hover {
- border-color: var(--accent-cyan);
- box-shadow: var(--glow-cyan);
- }
+        .build-preview {
+            height: 220px;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #0d111b;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
- .build-card.magenta-theme:hover {
- border-color: var(--accent-magenta);
- box-shadow: var(--glow-magenta);
- }
+        .build-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
 
- .build-preview {
- height: 220px;
- width: 100%;
- position: relative;
- display: flex;
- align-items: center;
- justify-content: center;
- overflow: hidden;
- background: #0d111b;
- border-bottom: 1px solid rgba(255, 255, 255, 0.08);
- }
+        .preview-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background: rgba(7, 9, 14, 0.6);
+            padding: 10px 20px;
+            backdrop-filter: blur(4px);
+        }
 
- .build-preview img {
- width: 100%;
- height: 100%;
- object-fit: cover;
- position: absolute;
- top: 0;
- left: 0;
- z-index: 1;
- }
+        .preview-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 2px;
+            background: rgba(0, 0, 0, 0.6);
+            display: inline-block;
+            margin-bottom: 8px;
+        }
 
- .preview-content {
- text-align: center;
- position: relative;
- z-index: 2;
- background: rgba(7, 9, 14, 0.6);
- padding: 10px 20px;
- backdrop-filter: blur(4px);
- }
+        .aurawaves-tag { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+        .midnight-tag { color: var(--accent-magenta); border: 1px solid var(--accent-magenta); }
 
- .preview-tag {
- font-family: var(--font-mono);
- font-size: 0.75rem;
- letter-spacing: 2px;
- text-transform: uppercase;
- padding: 3px 10px;
- border-radius: 2px;
- background: rgba(0, 0, 0, 0.6);
- display: inline-block;
- margin-bottom: 8px;
- }
+        .build-body {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
 
- .aurawaves-tag { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
- .midnight-tag { color: var(--accent-magenta); border: 1px solid var(--accent-magenta); }
+        .build-name {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
 
- .build-body {
- padding: 28px;
- display: flex;
- flex-direction: column;
- flex-grow: 1;
- }
+        .build-details {
+            list-style: none;
+            margin: 16px 0 24px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
 
- .build-name {
- font-family: var(--font-display);
- font-size: 1.4rem;
- color: #fff;
- margin-bottom: 10px;
- letter-spacing: 1px;
- }
+        .build-details li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 6px;
+        }
 
- .build-details {
- list-style: none;
- margin: 16px 0 24px;
- font-size: 0.95rem;
- color: var(--text-muted);
- }
+        .build-details li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            font-weight: bold;
+        }
 
- .build-details li {
- position: relative;
- padding-left: 20px;
- margin-bottom: 6px;
- }
+        .btn-mega {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #d9272e;
+            color: #fff;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 14px 20px;
+            border-radius: 2px;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
 
- .build-details li::before {
- content: '>';
- position: absolute;
- left: 0;
- color: var(--accent-cyan);
- font-family: var(--font-mono);
- font-weight: bold;
- }
+        .btn-mega:hover {
+            background: #f02d35;
+            box-shadow: 0 0 25px rgba(217, 39, 46, 0.5);
+            transform: scale(1.02);
+        }
 
- .btn-mega {
- margin-top: auto;
- display: inline-flex;
- align-items: center;
- justify-content: center;
- gap: 10px;
- background: #d9272e;
- color: #fff;
- text-decoration: none;
- font-family: var(--font-display);
- font-size: 0.85rem;
- font-weight: 700;
- letter-spacing: 1.5px;
- text-transform: uppercase;
- padding: 14px 20px;
- border-radius: 2px;
- transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
- }
+        /* CUSTOMIZATION & CONTACT */
+        .contact-box {
+            background: linear-gradient(180deg, rgba(13, 17, 27, 0.9) 0%, rgba(20, 26, 42, 0.6) 100%);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: var(--glow-cyan);
+            padding: 48px;
+            position: relative;
+        }
 
- .btn-mega:hover {
- background: #f02d35;
- box-shadow: 0 0 25px rgba(217, 39, 46, 0.5);
- transform: scale(1.02);
- }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
 
- /* CUSTOMIZATION & CONTACT */
- .contact-box {
- background: linear-gradient(180deg, rgba(13, 17, 27, 0.9) 0%, rgba(20, 26, 42, 0.6) 100%);
- border: 1px solid rgba(0, 240, 255, 0.3);
- box-shadow: var(--glow-cyan);
- padding: 48px;
- position: relative;
- }
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
 
- .contact-grid {
- display: grid;
- grid-template-columns: 1.2fr 0.8fr;
- gap: 40px;
- align-items: center;
- }
+        .services-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
- .contact-info p {
- color: var(--text-muted);
- margin-bottom: 16px;
- }
+        .service-pill {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 2px;
+            color: #fff;
+        }
 
- .services-tags {
- display: flex;
- flex-wrap: wrap;
- gap: 10px;
- margin-top: 20px;
- }
+        .contact-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px dashed rgba(0, 240, 255, 0.3);
+            padding: 32px;
+            text-align: center;
+        }
 
- .service-pill {
- font-family: var(--font-mono);
- font-size: 0.8rem;
- background: rgba(255, 255, 255, 0.05);
- border: 1px solid rgba(255, 255, 255, 0.1);
- padding: 6px 12px;
- border-radius: 2px;
- color: #fff;
- }
+        .email-link {
+            font-family: var(--font-mono);
+            font-size: 1.15rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            letter-spacing: 1px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+            margin-top: 10px;
+            word-break: break-all;
+        }
 
- .contact-action {
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- background: rgba(0, 0, 0, 0.4);
- border: 1px dashed rgba(0, 240, 255, 0.3);
- padding: 32px;
- text-align: center;
- }
+        .email-link:hover {
+            color: #fff;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: var(--glow-cyan);
+        }
 
- .email-link {
- font-family: var(--font-mono);
- font-size: 1.15rem;
- color: var(--accent-cyan);
- text-decoration: none;
- letter-spacing: 1px;
- border-bottom: 1px solid transparent;
- transition: all 0.3s;
- margin-top: 10px;
- word-break: break-all;
- }
+        /* FOOTER */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 36px 0;
+            background: #040609;
+            text-align: center;
+        }
 
- .email-link:hover {
- color: #fff;
- border-bottom-color: var(--accent-cyan);
- text-shadow: var(--glow-cyan);
- }
+        .footer-text {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
 
- /* FOOTER */
- footer {
- border-top: 1px solid rgba(255, 255, 255, 0.08);
- padding: 36px 0;
- background: #040609;
- text-align: center;
- }
+        .footer-text span {
+            color: var(--accent-cyan);
+        }
 
- .footer-text {
- font-family: var(--font-mono);
- font-size: 0.85rem;
- color: var(--text-muted);
- letter-spacing: 1px;
- }
-
- .footer-text span {
- color: var(--accent-cyan);
- }
-
- @media (max-width: 768px) {
- .contact-grid {
- grid-template-columns: 1fr;
- }
- .nav-links {
- display: none;
- }
- .contact-box {
- padding: 24px;
- }
- }
- </style>
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+            .contact-box {
+                padding: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                Custom <span>Studio</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">О проекте</a></li>
+                <li><a href="#builds">Сборки</a></li>
+                <li><a href="#customization">Кастомизация</a></li>
+            </ul>
+        </div>
+    </header>
 
- <header>
- <div class="container nav-content">
- <a href="#" class="logo">
- Custom Boot <span>Studio</span>
- </a>
- <ul class="nav-links">
- <li><a href="#about">О проекте</a></li>
- <li><a href="#builds">Сборки</a></li>
- <li><a href="#customization">Кастомизация</a></li>
- </ul>
- </div>
- </header>
+    <main class="container">
+        <section class="hero">
+            <div class="hero-badge">Multi-Boot Architecture &amp; OS Customization</div>
+            <h1 class="hero-title">Custom Boot <span class="gradient-text">Studio</span></h1>
+            <p class="hero-desc">
+                Индивидуальная разработка мультизагрузочных флеш-накопителей, интеграция специализированных сред, эксклюзивные графические интерфейсы и тонкая доработка WIM-образов.
+            </p>
+        </section>
 
- <section class="hero">
- <div class="container">
- <div class="hero-badge">Multi-Boot Architecture & OS Customization</div>
- <h1 class="hero-title">Custom Boot <span class="gradient-text">Studio</span></h1>
- <p class="hero-desc">
- Индивидуальная разработка мультизагрузочных флеш-накопителей, интеграция специализированных сред, эксклюзивные графические интерфейсы и тонкая доработка WIM-образов.
- </p>
- </div>
- </section>
+        <!-- О проекте -->
+        <section id="about">
+            <div class="section-header">
+                <span class="section-tag">// Engineering &amp; Aesthetics</span>
+                <h2 class="section-title">О Проекте</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">[01]</div>
+                    <h3 class="feature-title">Кастомные Меню</h3>
+                    <p class="feature-text">
+                        Проектирование визуальных оболочек для системных загрузчиков (GRUB2, Ventoy, rEFInd, WinPE) с высокой плотностью адаптивности под любые разрешения дисплеев.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">[02]</div>
+                    <h3 class="feature-title">AuraWaves &amp; Midnight</h3>
+                    <p class="feature-text">
+                        Авторские графические паки со стилизованными анимированными переходами, неоновыми подложками и глубокой проработкой контрастных тем интерфейса.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">[03]</div>
+                    <h3 class="feature-title">Иконки и Ассеты</h3>
+                    <p class="feature-text">
+                        Полноформатные векторные и растровые библиотеки иконок для наглядной визуализации операционных систем, утилит диагностики и резервного копирования.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">[04]</div>
+                    <h3 class="feature-title">Автоматизация &amp; Скрипты</h3>
+                    <p class="feature-text">
+                        Комплексные скрипты бесшовной интеграции драйверов, тихого развертывания ПО, инициализации среды и быстрого монтирования дисковых пространств.
+                    </p>
+                </div>
+            </div>
+        </section>
 
- <!-- О проекте -->
- <section id="about">
- <div class="container">
- <div class="section-header">
- <span class="section-tag">// Engineering & Aesthetics</span>
- <h2 class="section-title">О Проекте</h2>
- </div>
- <div class="features-grid">
- <div class="feature-card">
- <div class="feature-icon">[01]</div>
- <h3 class="feature-title">Кастомные Меню</h3>
- <p class="feature-text">
- Проектирование визуальных оболочек для системных загрузчиков (GRUB2, Ventoy, rEFInd, WinPE) с высокой плотностью адаптивности под любые разрешения дисплеев.
- </p>
- </div>
- <div class="feature-card">
- <div class="feature-icon">[02]</div>
- <h3 class="feature-title">AuraWaves & Midnight</h3>
- <p class="feature-text">
- Авторские графические паки со стилизованными анимированными переходами, неоновыми подложками и глубокой проработкой контрастных тем интерфейса.
- </p>
- </div>
- <div class="feature-card">
- <div class="feature-icon">[03]</div>
- <h3 class="feature-title">Иконки и Ассеты</h3>
- <p class="feature-text">
- Полноформатные векторные и растровые библиотеки иконок для наглядной визуализации операционных систем, утилит диагностики и резервного копирования.
- </p>
- </div>
- <div class="feature-card">
- <div class="feature-icon">[04]</div>
- <h3 class="feature-title">Автоматизация & Скрипты</h3>
- <p class="feature-text">
- Комплексные скрипты бесшовной интеграции драйверов, тихого развертывания ПО, инициализации среды и быстрого монтирования дисковых пространств.
- </p>
- </div>
- </div>
- </div>
- </section>
+        <!-- Сборки и графические пакеты -->
+        <section id="builds">
+            <div class="section-header">
+                <span class="section-tag">// System Releases</span>
+                <h2 class="section-title">Сборки и графические пакеты</h2>
+            </div>
+            <div class="builds-grid">
+                <!-- AuraWaves -->
+                <div class="build-card cyan-theme">
+                    <div class="build-preview">
+                        <img src="AuraWaves_Preview/aura_preview.jpg" alt="AuraWaves Preview" onerror="this.style.display='none'">
+                        <div class="preview-content">
+                            <span class="preview-tag aurawaves-tag">Cyan Cyber Edition</span>
+                            <h3 style="font-family: var(--font-display); color: #fff; font-size: 1.5rem;">AuraWaves</h3>
+                        </div>
+                    </div>
+                    <div class="build-body">
+                        <h3 class="build-name">Графический пакет AuraWaves</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            Легковесная неоновая тема оформления загрузчика в лазурно-бирюзовых тонах с динамической подсветкой активных пунктов.
+                        </p>
+                        <ul class="build-details">
+                            <li>Оптимизация под Full HD &amp; 4K мониторы</li>
+                            <li>Полный пак иконок дистрибутивов и утилит</li>
+                            <li>Подготовленная конфигурация для GRUB2 / Ventoy</li>
+                        </ul>
+                        <a href="https://mega.nz/file/1FdDwY4C#4Bh2hTS86J9V73cP8G8SiB5aooEHYtmMuPyErU1j-y4" target="_blank" rel="noopener noreferrer" class="btn-mega">
+                            <span>Скачать через Mega</span>
+                        </a>
+                    </div>
+                </div>
 
- <!-- Сборки и графические пакеты -->
- <section id="builds">
- <div class="container">
- <div class="section-header">
- <span class="section-tag">// System Releases</span>
- <h2 class="section-title">Сборки и графические пакеты</h2>
- </div>
- <div class="builds-grid">
- <!-- AuraWaves -->
- <div class="build-card cyan-theme">
- <div class="build-preview">
- <img src="AuraWaves_Preview/aura_preview.jpg" alt="AuraWaves Preview" onerror="this.style.display='none'">
- <div class="preview-content">
- <span class="preview-tag aurawaves-tag">Cyan Cyber Edition</span>
- <h3 style="font-family: var(--font-display); color: #fff; font-size: 1.5rem;">AuraWaves</h3>
- </div>
- </div>
- <div class="build-body">
- <h3 class="build-name">Графический пакет AuraWaves</h3>
- <p style="color: var(--text-muted); font-size: 0.95rem;">
- Легковесная неоновая тема оформления загрузчика в лазурно-бирюзовых тонах с динамической подсветкой активных пунктов.
- </p>
- <ul class="build-details">
- <li>Оптимизация под Full HD & 4K мониторы</li>
- <li>Полный пак иконок дистрибутивов и утилит</li>
- <li>Подготовленная конфигурация для GRUB2 / Ventoy</li>
- </ul>
- <a href="https://mega.nz/file/1FdDwY4C#4Bh2hTS86J9V73cP8G8SiB5aooEHYtmMuPyErU1j-y4" target="_blank" rel="noopener noreferrer" class="btn-mega">
- <span>Скачать через Mega</span>
- </a>
- </div>
- </div>
+                <!-- MidnightSecret -->
+                <div class="build-card magenta-theme">
+                    <div class="build-preview">
+                        <img src="Midnight_Preview/midnight_preview.jpg" alt="MidnightSecret Preview" onerror="this.style.display='none'">
+                        <div class="preview-content">
+                            <span class="preview-tag midnight-tag">Deep Magenta Edition</span>
+                            <h3 style="font-family: var(--font-display); color: #fff; font-size: 1.5rem;">MidnightSecret</h3>
+                        </div>
+                    </div>
+                    <div class="build-body">
+                        <h3 class="build-name">Графический пакет MidnightSecret</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            Строгий и глубокий ночной интерфейс с неоново-пурпурными акцентами, создающий атмосферу киберпанка и технологичности.
+                        </p>
+                        <ul class="build-details">
+                            <li>Эксклюзивные шрифты и монохромные иконки</li>
+                            <li>Мгновенный отклик меню и плавная анимация</li>
+                            <li>Полная совместимость с современными UEFI-системами</li>
+                        </ul>
+                        <a href="https://mega.nz/file/h8cgkCZD#8p4v2g1m6s7Xw9yQ3L5K0zB4F1t_a2N6j8H3d9P1e7Q" target="_blank" rel="noopener noreferrer" class="btn-mega">
+                            <span>Скачать через Mega</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
- <!-- MidnightSecret -->
- <div class="build-card magenta-theme">
- <div class="build-preview">
- <img src="MidnightSecret_Preview/midnight_preview.jpg" alt="MidnightSecret Preview" onerror="this.style.display='none'">
- <div class="preview-content">
- <span class="preview-tag midnight-tag">Deep Dark Violet</span>
- <h3 style="font-family: var(--font-display); color: #fff; font-size: 1.5rem;">MidnightSecret</h3>
- </div>
- </div>
- <div class="build-body">
- <h3 class="build-name">Графический пакет MidnightSecret</h3>
- <p style="color: var(--text-muted); font-size: 0.95rem;">
- Глубокий темный интерфейс с пурпурно-фиолетовыми акцентами для ночной работы без усталости глаз и строгой эстетикой.
- </p>
- <ul class="build-details">
- <li>Минималистичная строгая типографика</li>
- <li>Встроенный информер аппаратных параметров ПК</li>
- <li>Скрытое сервисное меню для аварийных утилит</li>
- </ul>
- <a href="https://mega.nz/file/tdkSHABI#IXdf5Rfxki59U5SBhJv1oE6YHKo2X-HGyuytUaGgJDU" target="_blank" rel="noopener noreferrer" class="btn-mega">
- <span>Скачать через Mega</span>
- </a>
- </div>
- </div>
- </div>
- </div>
- </section>
+        <!-- Кастомизация -->
+        <section id="customization">
+            <div class="section-header">
+                <span class="section-tag">// Personal Customization</span>
+                <h2 class="section-title">Индивидуальный заказ</h2>
+            </div>
+            <div class="contact-box">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <p>Нужна уникальная сборка под твои задачи? Можем внедрить персональные скрипты, изменить дизайн под ключ, добавить нужные дистрибутивы Windows (XP, 7, 10, 11) и настроить под конкретное железо.</p>
+                        <div class="services-tags">
+                            <span class="service-pill">WIM / ISO Integration</span>
+                            <span class="service-pill">GRUB4Dos / Ventoy</span>
+                            <span class="service-pill">Bootice / EasyBCD</span>
+                            <span class="service-pill">Custom Skins</span>
+                        </div>
+                    </div>
+                    <div class="contact-action">
+                        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">Связь с разработчиком:</span>
+                        <a href="mailto:19vitalij70@gmail.com" class="email-link">19vitalij70@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
- <!-- Кастомизация и связь -->
- <section id="customization">
- <div class="container">
- <div class="contact-box">
- <div class="contact-grid">
- <div class="contact-info">
- <span class="section-tag">// Tailored Engineering</span>
- <h2 class="section-title" style="margin-bottom: 16px;">Кастомизация и Заказ</h2>
- <p>
- Необходима кастомная мультизагрузочная среда под задачи сервисного центра, системного администратора или индивидуальный брендинг компании?
- </p>
- <p>
- Выполняю профессиональный модификационный инжиниринг: тонкую обработку, очистку и модификацию системных образов <code>boot.wim</code> и <code>install.wim</code>, внедрение NVMe/RAID-драйверов, интеграцию кастомного софта и оптимизацию времени старта.
- </p>
- <div class="services-tags">
- <span class="service-pill">boot.wim modification</span>
- <span class="service-pill">install.wim debloat</span>
- <span class="service-pill">Driver injection</span>
- <span class="service-pill">UEFI / Legacy hybrid</span>
- </div>
- </div>
- <div class="contact-action">
- <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">
- Прямая связь со студией
- </span>
- <a href="mailto:20Vitalij20@proton.me" class="email-link">20Vitalij20@proton.me</a>
- <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
- Защищенная электронная почта через ProtonMail
- </p>
- </div>
- </div>
- </div>
- </div>
- </section>
-
- <footer>
- <div class="container">
- <p class="footer-text">
- &copy; 2026 <span>Custom Boot Studio</span>. Все права защищены. Решения для загрузочных сред и кастомизации.
- </p>
- </div>
- </footer>
-
+    <footer>
+        <div class="container">
+            <p class="footer-text">Custom Boot Studio &copy; 2026 // <span>All Rights Reserved</span></p>
+        </div>
+    </footer>
 </body>
 </html>
-
+
