@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -52,7 +51,6 @@
             padding: 0 24px;
         }
 
-        /* HEADER */
         header {
             position: sticky;
             top: 0;
@@ -108,7 +106,6 @@
             text-shadow: var(--glow-cyan);
         }
 
-        /* HERO SECTION */
         .hero {
             padding: 120px 0 90px;
             text-align: center;
@@ -167,7 +164,6 @@
             font-size: 1.15rem;
         }
 
-        /* SECTION STYLING */
         section {
             padding: 80px 0;
         }
@@ -195,53 +191,9 @@
             color: #fff;
         }
 
-        /* ABOUT / FEATURES */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 32px 24px;
-            position: relative;
-            backdrop-filter: blur(8px);
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--bg-card-border);
-            box-shadow: var(--glow-cyan);
-        }
-
-        .feature-icon {
-            font-family: var(--font-mono);
-            font-size: 1.8rem;
-            color: var(--accent-cyan);
-            margin-bottom: 16px;
-        }
-
-        .feature-title {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            margin-bottom: 12px;
-            color: #fff;
-            letter-spacing: 1px;
-        }
-
-        .feature-text {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* BUILDS / PACKS */
         .builds-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 32px;
         }
 
@@ -267,7 +219,7 @@
         }
 
         .build-preview {
-            height: 220px;
+            height: 200px;
             width: 100%;
             position: relative;
             display: flex;
@@ -285,14 +237,13 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 1;
         }
 
         .preview-content {
             text-align: center;
             position: relative;
             z-index: 2;
-            background: rgba(7, 9, 14, 0.6);
+            background: rgba(7, 9, 14, 0.7);
             padding: 10px 20px;
             backdrop-filter: blur(4px);
         }
@@ -310,6 +261,7 @@
         }
 
         .aurawaves-tag { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+        .veynron-tag { color: var(--accent-purple); border: 1px solid var(--accent-purple); }
         .midnight-tag { color: var(--accent-magenta); border: 1px solid var(--accent-magenta); }
 
         .build-body {
@@ -321,7 +273,7 @@
 
         .build-name {
             font-family: var(--font-display);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #fff;
             margin-bottom: 10px;
             letter-spacing: 1px;
@@ -374,74 +326,6 @@
             transform: scale(1.02);
         }
 
-        /* CUSTOMIZATION & CONTACT */
-        .contact-box {
-            background: linear-gradient(180deg, rgba(13, 17, 27, 0.9) 0%, rgba(20, 26, 42, 0.6) 100%);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            box-shadow: var(--glow-cyan);
-            padding: 48px;
-            position: relative;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .contact-info p {
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .services-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .service-pill {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 2px;
-            color: #fff;
-        }
-
-        .contact-action {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px dashed rgba(0, 240, 255, 0.3);
-            padding: 32px;
-            text-align: center;
-        }
-
-        .email-link {
-            font-family: var(--font-mono);
-            font-size: 1.15rem;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            letter-spacing: 1px;
-            border-bottom: 1px solid transparent;
-            transition: all 0.3s;
-            margin-top: 10px;
-            word-break: break-all;
-        }
-
-        .email-link:hover {
-            color: #fff;
-            border-bottom-color: var(--accent-cyan);
-            text-shadow: var(--glow-cyan);
-        }
-
-        /* FOOTER */
         footer {
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding: 36px 0;
@@ -459,104 +343,49 @@
         .footer-text span {
             color: var(--accent-cyan);
         }
-
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav-links {
-                display: none;
-            }
-            .contact-box {
-                padding: 24px;
-            }
-        }
     </style>
 </head>
 <body>
     <header>
         <div class="container nav-content">
-            <a href="#" class="logo">
-                Custom <span>Studio</span>
-            </a>
+            <a href="#" class="logo">Custom <span>Studio</span></a>
             <ul class="nav-links">
-                <li><a href="#about">О проекте</a></li>
                 <li><a href="#builds">Сборки</a></li>
-                <li><a href="#customization">Кастомизация</a></li>
             </ul>
         </div>
     </header>
 
     <main class="container">
         <section class="hero">
-            <div class="hero-badge">Multi-Boot Architecture &amp; OS Customization</div>
+            <div class="hero-badge">Multi-Boot Architecture & OS Customization</div>
             <h1 class="hero-title">Custom Boot <span class="gradient-text">Studio</span></h1>
             <p class="hero-desc">
                 Индивидуальная разработка мультизагрузочных флеш-накопителей, интеграция специализированных сред, эксклюзивные графические интерфейсы и тонкая доработка WIM-образов.
             </p>
         </section>
 
-        <!-- О проекте -->
-        <section id="about">
-            <div class="section-header">
-                <span class="section-tag">// Engineering &amp; Aesthetics</span>
-                <h2 class="section-title">О Проекте</h2>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">[01]</div>
-                    <h3 class="feature-title">Кастомные Меню</h3>
-                    <p class="feature-text">
-                        Проектирование визуальных оболочек для системных загрузчиков (GRUB2, Ventoy, rEFInd, WinPE) с высокой плотностью адаптивности под любые разрешения дисплеев.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">[02]</div>
-                    <h3 class="feature-title">AuraWaves &amp; Midnight</h3>
-                    <p class="feature-text">
-                        Авторские графические паки со стилизованными анимированными переходами, неоновыми подложками и глубокой проработкой контрастных тем интерфейса.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">[03]</div>
-                    <h3 class="feature-title">Иконки и Ассеты</h3>
-                    <p class="feature-text">
-                        Полноформатные векторные и растровые библиотеки иконок для наглядной визуализации операционных систем, утилит диагностики и резервного копирования.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">[04]</div>
-                    <h3 class="feature-title">Автоматизация &amp; Скрипты</h3>
-                    <p class="feature-text">
-                        Комплексные скрипты бесшовной интеграции драйверов, тихого развертывания ПО, инициализации среды и быстрого монтирования дисковых пространств.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Сборки и графические пакеты -->
         <section id="builds">
             <div class="section-header">
-                <span class="section-tag">// System Releases</span>
+                <span class="section-tag">// System Releases & Packs</span>
                 <h2 class="section-title">Сборки и графические пакеты</h2>
             </div>
             <div class="builds-grid">
-                <!-- AuraWaves -->
+                <!-- Aura -->
                 <div class="build-card cyan-theme">
                     <div class="build-preview">
-                        <img src="AuraWaves_Preview/aura_preview.jpg" alt="AuraWaves Preview" onerror="this.style.display='none'">
+                        <img src="Aura/aura_preview.jpg" alt="Aura Preview" onerror="this.style.display='none'">
                         <div class="preview-content">
                             <span class="preview-tag aurawaves-tag">Cyan Cyber Edition</span>
-                            <h3 style="font-family: var(--font-display); color: #fff; font-size: 1.5rem;">AuraWaves</h3>
+                            <h3 style="font-family: var(--font-display); color: #fff; font-size: 1.3rem;">Aura</h3>
                         </div>
                     </div>
                     <div class="build-body">
-                        <h3 class="build-name">Графический пакет AuraWaves</h3>
+                        <h3 class="build-name">Графический пакет Aura</h3>
                         <p style="color: var(--text-muted); font-size: 0.95rem;">
                             Легковесная неоновая тема оформления загрузчика в лазурно-бирюзовых тонах с динамической подсветкой активных пунктов.
                         </p>
                         <ul class="build-details">
-                            <li>Оптимизация под Full HD &amp; 4K мониторы</li>
+                            <li>Оптимизация под Full HD & 4K мониторы</li>
                             <li>Полный пак иконок дистрибутивов и утилит</li>
                             <li>Подготовленная конфигурация для GRUB2 / Ventoy</li>
                         </ul>
@@ -566,17 +395,42 @@
                     </div>
                 </div>
 
-                <!-- MidnightSecret -->
-                <div class="build-card magenta-theme">
+                <!-- Veyron -->
+                <div class="build-card cyan-theme">
                     <div class="build-preview">
-                        <img src="Midnight_Preview/midnight_preview.jpg" alt="MidnightSecret Preview" onerror="this.style.display='none'">
+                        <img src="Veyron/veyron_preview.jpg" alt="Veyron Preview" onerror="this.style.display='none'">
                         <div class="preview-content">
-                            <span class="preview-tag midnight-tag">Deep Magenta Edition</span>
-                            <h3 style="font-family: var(--font-display); color: #fff; font-size: 1.5rem;">MidnightSecret</h3>
+                            <span class="preview-tag veynron-tag">Compact Edition</span>
+                            <h3 style="font-family: var(--font-display); color: #fff; font-size: 1.3rem;">Veyron</h3>
                         </div>
                     </div>
                     <div class="build-body">
-                        <h3 class="build-name">Графический пакет MidnightSecret</h3>
+                        <h3 class="build-name">Графический пакет Veyron</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            Компактный и быстрый графический модуль с выверенной типографикой и минималистичными элементами управления.
+                        </p>
+                        <ul class="build-details">
+                            <li>Высокая скорость отклика интерфейса</li>
+                            <li>Чистая и аккуратная компоновка меню</li>
+                            <li>Адаптация под любые типы накопителей</li>
+                        </ul>
+                        <a href="https://mega.nz/file/VEYRON_LINK_HERE" target="_blank" rel="noopener noreferrer" class="btn-mega">
+                            <span>Скачать через Mega</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Midnight -->
+                <div class="build-card magenta-theme">
+                    <div class="build-preview">
+                        <img src="Midnight/midnight_preview.jpg" alt="Midnight Preview" onerror="this.style.display='none'">
+                        <div class="preview-content">
+                            <span class="preview-tag midnight-tag">Deep Magenta Edition</span>
+                            <h3 style="font-family: var(--font-display); color: #fff; font-size: 1.3rem;">Midnight</h3>
+                        </div>
+                    </div>
+                    <div class="build-body">
+                        <h3 class="build-name">Графический пакет Midnight</h3>
                         <p style="color: var(--text-muted); font-size: 0.95rem;">
                             Строгий и глубокий ночной интерфейс с неоново-пурпурными акцентами, создающий атмосферу киберпанка и технологичности.
                         </p>
@@ -592,31 +446,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Кастомизация -->
-        <section id="customization">
-            <div class="section-header">
-                <span class="section-tag">// Personal Customization</span>
-                <h2 class="section-title">Индивидуальный заказ</h2>
-            </div>
-            <div class="contact-box">
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <p>Нужна уникальная сборка под твои задачи? Можем внедрить персональные скрипты, изменить дизайн под ключ, добавить нужные дистрибутивы Windows (XP, 7, 10, 11) и настроить под конкретное железо.</p>
-                        <div class="services-tags">
-                            <span class="service-pill">WIM / ISO Integration</span>
-                            <span class="service-pill">GRUB4Dos / Ventoy</span>
-                            <span class="service-pill">Bootice / EasyBCD</span>
-                            <span class="service-pill">Custom Skins</span>
-                        </div>
-                    </div>
-                    <div class="contact-action">
-                        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">Связь с разработчиком:</span>
-                        <a href="mailto:19vitalij70@gmail.com" class="email-link">19vitalij70@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
@@ -626,4 +455,3 @@
     </footer>
 </body>
 </html>
-
