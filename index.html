@@ -30,7 +30,7 @@
 }
 body {
   background-color: var(--bg-base);
-  background-image:
+  background-image: 
     radial-gradient(circle at 15% 20%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
     radial-gradient(circle at 85% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 45%),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
@@ -316,21 +316,50 @@ section {
   font-family: var(--font-mono);
   font-weight: bold;
 }
-.btn-mega {
+.build-actions {
+  display: flex;
+  gap: 12px;
   margin-top: auto;
+}
+.btn-folder {
+  flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 12px 14px;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.btn-folder:hover {
+  background: rgba(0, 240, 255, 0.2);
+  box-shadow: var(--glow-cyan);
+  color: #fff;
+}
+.btn-mega {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: #d9272e;
   color: #fff;
   text-decoration: none;
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 14px 20px;
+  padding: 12px 14px;
   border-radius: 2px;
   transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
 }
@@ -455,7 +484,7 @@ footer {
 <div class="builds-grid">
 <div class="build-card cyan-theme">
 <div class="build-preview">
-<img src="./AuraWaves_Preview/preview.jpg" alt="AuraWaves Preview" onerror="this.style.display='none'">
+<img src="AuraWaves_Preview/preview.jpg" alt="AuraWaves Preview" onerror="this.style.display='none'">
 <div class="preview-content">
 <span class="preview-tag aurawaves-tag">AuraWaves_Custom</span>
 </div>
@@ -467,12 +496,15 @@ footer {
 <li>Набор диагностических утилит</li>
 <li>Кастомная неоновая тема оформления</li>
 </ul>
-<a href="https://mega.nz/fm/QJkESZAR" class="btn-mega" target="_blank" rel="noopener noreferrer">Открыть на MEGA (AuraWaves_Custom.rar)</a>
+<div class="build-actions">
+<a href="AuraWaves_Custom/" class="btn-folder" target="_blank">Папка сборок</a>
+<a href="https://mega.nz/file/1FdDwY4C#4Bh2hTS86J9V73cP8G8SiB5aooEHYtmMuPyErU1j-y4" class="btn-mega" target="_blank" rel="noopener noreferrer">Скачать архив</a>
+</div>
 </div>
 </div>
 <div class="build-card magenta-theme">
 <div class="build-preview">
-<img src="./MidnightSecret_Preview/preview.jpg" alt="MidnightSecret Preview" onerror="this.style.display='none'">
+<img src="MidnightSecret_Preview/preview.jpg" alt="MidnightSecret Preview" onerror="this.style.display='none'">
 <div class="preview-content">
 <span class="preview-tag midnight-tag">MidnightSecret_Custom</span>
 </div>
@@ -484,7 +516,10 @@ footer {
 <li>Поддержка тонкой кастомизации меню</li>
 <li>Интегрированные драйверы и софт</li>
 </ul>
-<a href="https://mega.nz/fm/QJkESZAR" class="btn-mega" target="_blank" rel="noopener noreferrer">Открыть на MEGA (MidnightSecret_Custom.rar)</a>
+<div class="build-actions">
+<a href="MidnightSecret_Custom/" class="btn-folder" target="_blank">Папка сборок</a>
+<a href="https://mega.nz/file/tdkSHABI#IXdf5Rfxki59U5SBhJv1oE6YHKo2X-HGyuytUaGgJDU" class="btn-mega" target="_blank" rel="noopener noreferrer">Скачать архив</a>
+</div>
 </div>
 </div>
 </div>
@@ -513,7 +548,7 @@ footer {
 </main>
 <footer>
 <div class="container">
-<p>Custom Boot Studio &copy; 2026. All rights reserved.</p>
+<p>&copy; 2026 Custom Boot Studio. Все права защищены.</p>
 </div>
 </footer>
 </body>
